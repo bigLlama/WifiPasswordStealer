@@ -9,14 +9,12 @@ wifi_password = []
 
 
 def copy_all():
-    # select all
     time.sleep(1)
     keyboard.press(Key.ctrl)
     keyboard.press('a')
     keyboard.release(Key.ctrl)
     keyboard.release('a')
 
-    # copy
     keyboard.press(Key.ctrl)
     keyboard.press('c')
     keyboard.release(Key.ctrl)
@@ -45,15 +43,16 @@ keyboard.press(Key.enter)
 keyboard.release(Key.enter)
 time.sleep(1)
 
+# copy to and paste from clipboard
 copy_all()
 words = pyperclip.paste()
-names = words.split("All User Profile     : ")
 
+# retrieve network name from cmd
+names = words.split("All User Profile     : ")
 for i in range(len(names)):
     if i == 0:
         continue
     network_names.append(names[i])
-
 
 for i in range(len(network_names)):
     e = network_names[i].split("\r")
@@ -62,6 +61,7 @@ for i in range(len(network_names)):
     string += e
 
 
+# lookup each wifi name and retrieve passwords
 wifi_name = string[::2]
 for i in range(len(wifi_name)):
     text = f'netsh wlan show profile name="{wifi_name[i]}" key=clear'
@@ -80,11 +80,13 @@ for i in range(len(wifi_name)):
     wifi_password.append(password[0])
     clear_cmd()
 
+#exit the cmd
 time.sleep(0.1)
 keyboard.type("exit")
 keyboard.press(Key.enter)
 keyboard.release(Key.enter)
 
+# create txt file to store passwords
 f = open("passwords.txt", "w")
 for i in range(len(wifi_name)):
     f.write(f'Wifi name: "{wifi_name[i]}" | Password: "{wifi_password[i]}"\n')
