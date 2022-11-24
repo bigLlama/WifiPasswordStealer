@@ -21,5 +21,5 @@ for name in Wifi_Names:
 
 f = open(f"passwords({len(Passwords)}).txt", "w")
 for i in range(len(Wifi_Names)):
-    f.write(f'Wifi_Name: {Wifi_Names[i]}\nPassword: {Passwords[i]}\n\n')
+    f.write(f'Wifi_Name({i}): {Wifi_Names[i]}\nPassword: {Passwords[i]}\n\n')
 f.close()
