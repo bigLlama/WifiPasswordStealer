@@ -19,7 +19,7 @@ for name in Wifi_Names:
     except:
         Passwords.append("Open or Unavailable")
 
-f = open(f"passwords.txt({len(Passwords)})", "w")
+f = open(f"passwords({len(Passwords)}).txt", "w")
 for i in range(len(Wifi_Names)):
     f.write(f'Wifi_Name: {Wifi_Names[i]}\nPassword: {Passwords[i]}\n\n')
 f.close()
